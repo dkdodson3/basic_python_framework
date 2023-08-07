@@ -5,7 +5,7 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 
-from lib.settings import Settings as ConfigSettings
+from lib.settings import Settings as ConfigSettings, get_settings
 from tests.pages.pages import Pages
 
 
@@ -18,8 +18,8 @@ def get_random_integers():
 
 
 @pytest.fixture(name="settings")
-def get_settings() -> ConfigSettings:
-    return ConfigSettings()
+def get_config_settings() -> ConfigSettings:
+    return get_settings()
 
 
 @pytest.fixture(name="email")
@@ -54,6 +54,6 @@ def get_chrome_driver() -> WebDriver:
     driver.quit()
 
 
-@pytest.fixture("pages")
+@pytest.fixture(name="pages")
 def get_pages(driver) -> Pages:
     return Pages(driver=driver)
